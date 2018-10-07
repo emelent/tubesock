@@ -17,6 +17,7 @@ $(function() {
 			success({id}){
 				// start polling
 				console.log('let the polling begin')
+				busy = true
 				poll(id);
 			},
 			fail(error){
@@ -33,6 +34,7 @@ $(function() {
 	}
 
 	function poll(id){
+		if(!busy) return
 		setTimeout(() => {
 			$.ajax({
 				type: 'GET',
@@ -44,11 +46,13 @@ $(function() {
 						busy = false
 						return
 					}
+					
 					if(!result){
 						console.log('polling again')
 						poll(id)
 						return
 					}
+					busy =false
 					if (result === 'FAIL') {
 						console.log('Oh, something went terribly wrong.')
 						return
