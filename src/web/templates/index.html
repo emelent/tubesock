@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>TubeSock | Home</title>
+</head>
+<body>
+	{% extends "_layout.html" %}
+	{% block content %}
+	<div id="container">
+		<div class="form-group">
+			<div class="input-group">
+				<input id="input-video-url" type="text" class="form-control" placeholder="Video URL">
+				<div class="input-group-append">
+					<div id="btn-fetch" class="btn btn-success">Go</div>
+				</div>
+	
+			</div>
+		</div>
+		<ul id="list-videos" class="list-group">
+		</ul>
+	</div>
+
+	{% endblock %}
+</body>
+</html>

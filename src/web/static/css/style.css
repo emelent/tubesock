@@ -1,0 +1,12 @@
+#container{
+	max-width: 480px;
+	margin: auto;
+}
+
+.link{
+	line-height: 2.3;
+}
+
+.download-btn{
+	float: right;
+}
