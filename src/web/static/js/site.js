@@ -37,8 +37,14 @@ $(function() {
 	function addDownloadLink(id, title, url){
 		$(`#item-${id}`)
 			.html(`<span>${title}</span><a class="btn btn-primary download-btn" href="${url}">Download</a>`)
+		$('download-btn').click(downloadBtn)
 	}
 
+	function downloadBtn(e){
+		e.preventDefault()
+		$el = $(this)
+		window.location.href=$el.href
+	}
 	function poll(id){
 		if(!queue[id].busy) return
 		setTimeout(() => {
