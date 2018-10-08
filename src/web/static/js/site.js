@@ -59,7 +59,7 @@ $(function() {
 					}
 					const downloadUrl = location.href + encodeURIComponent(result.url)
 					console.log('Download at =>', downloadUrl)
-					addDownloadLink(result.title, result.url)
+					addDownloadLink(result.title, downloadUrl)
 				},
 				fail(error){
 					console.error('Failed =>', error)
