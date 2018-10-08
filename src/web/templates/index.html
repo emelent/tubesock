@@ -7,15 +7,18 @@
 	{% extends "_layout.html" %}
 	{% block content %}
 	<div id="container">
-		<div class="form-group">
+		<div id="search-container" class="form-group">
 			<div class="input-group">
 				<input id="input-video-url" type="text" class="form-control" placeholder="Video URL">
 				<div class="input-group-append">
-					<div id="btn-fetch" class="btn btn-success">Go</div>
+					<div id="btn-fetch" class="btn btn-success">Queue</div>
 				</div>
 	
 			</div>
 		</div>
+		<br/>
+		<h6 class="text-center">Download Queue</h6>
+		<br/>
 		<ul id="list-videos" class="list-group">
 		</ul>
 	</div>

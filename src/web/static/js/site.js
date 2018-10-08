@@ -1,11 +1,11 @@
 $(function() {
 	const interval = 2000
-	let busy = false
 	const $videoList = $('#list-videos')
+	const queue = {}
 
 	function onGoClick(){
 		const url = $('#input-video-url').val()
-		if (url === '' || busy) return
+		if (url === '') return
 
 		console.log('fetching =>', url)
 		
@@ -17,8 +17,8 @@ $(function() {
 			success({id}){
 				// start polling
 				console.log('let the polling begin')
-				busy = true
-				poll(id);
+				addQueueItem(id)
+				poll(id)
 			},
 			fail(error){
 				console.error('Failed =>', error)
@@ -26,15 +26,21 @@ $(function() {
 		})  
 	}
 
-	function addDownloadLink(title, url){
+	function addQueueItem(id){
+		queue[id] = {busy: true}
 		const $el = $(
-			`<li class="list-group-item link">${title} <a class="btn btn-primary download-btn" href="${url}">Download</a></li>`
+			`<li id="item-${id}" class="list-group-item link">BUSY...</li>`
 		)
 		$videoList.append($el)
 	}
 
+	function addDownloadLink(id, title, url){
+		$(`#item-${id}`)
+			.html(`<span>${title}</span><a class="btn btn-primary download-btn" href="${url}">Download</a>`)
+	}
+
 	function poll(id){
-		if(!busy) return
+		if(!queue[id].busy) return
 		setTimeout(() => {
 			$.ajax({
 				type: 'GET',
@@ -43,7 +49,7 @@ $(function() {
 				success({result, error}){
 					if (error){
 						console.error('failed => ', error)
-						busy = false
+						queue[id].busy = false
 						return
 					}
 					
@@ -52,14 +58,13 @@ $(function() {
 						poll(id)
 						return
 					}
-					busy =false
+					queue[id].busy = false
 					if (result === 'FAIL') {
 						console.log('Oh, something went terribly wrong.')
 						return
 					}
-					const downloadUrl = location.href + encodeURIComponent(result.url)
-					console.log('Download at =>', downloadUrl)
-					addDownloadLink(result.title, downloadUrl)
+					console.log('Download at =>', result.url)
+					addDownloadLink(id, result.title, result.url)
 				},
 				fail(error){
 					console.error('Failed =>', error)
