@@ -1,14 +1,14 @@
 $(function() {
 	const interval = 2000
 	const $videoList = $('#list-videos')
+	const $input = $('#input-video-url')
 	const queue = {}
 
 	function onGoClick(){
-		const url = $('#input-video-url').val()
+		const url = $input.val()
 		if (url === '') return
 
-		console.log('fetching =>', url)
-		
+		$input.val('')
 		$.ajax({
 			type: 'POST',
 			url: '/fetch',
