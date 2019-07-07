@@ -1,11 +1,10 @@
 import sys
-sys.path.insert(0, './src')
 
 import os
 from flask import Flask, render_template, jsonify, request
 from rq import Queue
-from job.downloader import conn
-from cmd.utils import count_words_at_url, fetch_video
+from src.job.downloader import conn
+from src.cmd.utils import fetch_video
 
 q = Queue(connection =conn, timeout='1h', result_ttl='3h')
 
@@ -24,13 +23,8 @@ app = create_app()
 def index():
 	return render_template("index.html")
 
+# @app.route("/video/<name>"):
 
-@app.route("/download", methods=['POST'])
-def downlad():
-	job = q.enqueue(count_words_at_url, request.form['url'])
-	return jsonify({
-		'id': job.id 
-	})
 
 @app.route("/fetch", methods=['POST'])
 def fetch():

@@ -1,2 +1,2 @@
-worker: python src/job/downloader.py
+worker: python -m src.job
 web: gunicorn src.web.app:app
