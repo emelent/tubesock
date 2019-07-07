@@ -9,7 +9,7 @@ from src.cmd.utils import fetch_video
 q = Queue(connection =conn, timeout='1h', result_ttl='3h')
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/src/web/static')
     app.config.from_mapping(
         SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev_key'
     )
@@ -32,6 +32,11 @@ def fetch():
 	return jsonify({
 		'id': job.id 
 	})
+
+@app.route("/download/<video>", methods=['GET'])
+def downlad(video):
+	print('Downloading =>', video)
+	return app.send_static_file('video/{}'.format(video))
 
 @app.route('/poll/<id>')
 def poll(id):

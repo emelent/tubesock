@@ -42,11 +42,10 @@ def fetch_video(url, opts=ydl_opts):
 	with youtube_dl.YoutubeDL(opts) as ydl:
 		data = ydl.extract_info(url, download=False)
 		ydl.download([url])
-		print(data['ext'])
 		# fname = '{}.{}'.format(data['id'], data['ext'])
 		fname = get_file_name(data['id'])
 		return {
-			'url': '/static/video/{}'.format(fname),
+			'url': '/download/{}'.format(fname),
 			'ext': data['ext'],
 			'title': data['title']
 		}
