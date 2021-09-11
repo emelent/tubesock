@@ -101,7 +101,7 @@ def upload_to_firebase(filename):
     else:
         import json
 
-        cred = json.loads(google_cred_json)
+        cred = credentials.Certificate(json.loads(google_cred_json))
 
     # initialize firebase
     bucket_name = "nimbus9-5.appspot.com"
