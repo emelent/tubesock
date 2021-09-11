@@ -9,10 +9,27 @@
 	<div id="container">
 		<div id="search-container" class="form-group">
 			<div class="input-group">
-				<input id="input-video-url" type="text" class="form-control" placeholder="Video URL">
-				<div class="input-group-append">
-					<div id="btn-fetch" class="btn btn-success">Queue</div>
+				<div class="input-group mb-3">
+					<input id="input-video-url" type="text" class="form-control" placeholder="Video URL">
 				</div>
+				<div class="input-group mb-3">
+					<input id="start" type="text" class="form-control" placeholder="start(HH:MM:ss) e.g. 00:00:00" aria-label="Start">
+					<span class="input-group-text">clip</span>
+					<input id="duration" type="text" class="form-control" placeholder="duration(HH:MM:ss) e.g. 00:00:30" aria-label="Duration">
+				</div>
+				<div class="input-group mb-3 ml-4">
+					<input id="hd" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Highest Quality (larger file, takes longer)
+					</label>
+				</div>
+
+				<div class="container">
+					<div class="text-center">
+						<div id="btn-fetch" class="btn btn-success">Queue Download</div>
+					</div>
+				</div>
+
 	
 			</div>
 		</div>

@@ -2,17 +2,25 @@ $(function() {
 	const interval = 2000
 	const $videoList = $('#list-videos')
 	const $input = $('#input-video-url')
+	const $start = $('#start')
+	const $duration = $('#duration')
+	const $hd = $('#hd')
+
 	const queue = {}
 
 	function onGoClick(){
 		const url = $input.val()
 		if (url === '') return
 
+		const start = $start.val().trim()
+		const duration = $duration.val().trim()
+		const hd = $hd.is(":checked")
+
 		$input.val('')
 		$.ajax({
 			type: 'POST',
 			url: '/fetch',
-			data: 'url='+encodeURIComponent(url),
+			data: `url=${encodeURIComponent(url)}&start=${encodeURIComponent(start)}&duration=${encodeURIComponent(duration)}&hd=${encodeURIComponent(hd)}`,
 			dataType: 'json',
 			success({id}){
 				// start polling
@@ -66,6 +74,7 @@ $(function() {
 					}
 					queue[id].busy = false
 					if (result === 'FAIL') {
+						alert("Download failed.")
 						console.log('Oh, something went terribly wrong.')
 						return
 					}

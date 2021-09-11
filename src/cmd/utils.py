@@ -36,7 +36,8 @@ def fetch_url(url, opts=""):
     }
 
 
-def fetch_video(url, opts=ydl_opts, hd=False, start=None, duration=None):
+def fetch_video(url, hd=False, start="", duration="", opts=ydl_opts):
+    logger.info(f"fetching_video(hd={hd}, start={start}, duration={duration})")
     # merge the opts
     opts.update(ydl_opts)
 
@@ -53,9 +54,11 @@ def fetch_video(url, opts=ydl_opts, hd=False, start=None, duration=None):
         fname = os.path.join(video_dir, get_file_name(data["id"]))
 
         # trim the video
-        if start is not None and duration is not None:
+        if start != "" and duration != "":
+            temp = fname
+            fname = "result.{}".format(data["ext"])
             logger.info("trimming url")
-            trim_bideo(start, duration, fname, fname)
+            trim_video(start, duration, temp, fname)
 
         # upload to firebase
         logger.info("uploading to firebase")
