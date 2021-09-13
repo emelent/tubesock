@@ -34,9 +34,10 @@ def fetch():
     job = q.enqueue(
         fetch_video,
         request.form["url"],
-        request.form["hd"] == "true",
         request.form["start"],
         request.form["duration"],
+        request.form["hd"] == "true",
+        request.form["audio"] == "true",
     )
     return jsonify({"id": job.id})
 
