@@ -36,7 +36,9 @@ def fetch_url(url, opts=""):
     }
 
 
-def fetch_video(url, hd=False, start="", duration="", opts=ydl_opts):
+def fetch_video(
+    url, start="", duration="", hd=False, audio=False, opts=ydl_opts
+):
     logger.info(f"fetching_video(hd={hd}, start={start}, duration={duration})")
     # merge the opts
     opts.update(ydl_opts)
@@ -44,6 +46,8 @@ def fetch_video(url, hd=False, start="", duration="", opts=ydl_opts):
     # use SD if hd not set
     if not hd:
         opts["format"] = "18"
+    if audio:
+        opts["format"] = "140"
 
     # download the video
     with youtube_dl.YoutubeDL(opts) as ydl:
