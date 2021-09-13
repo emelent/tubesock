@@ -5,6 +5,7 @@ $(function() {
 	const $start = $('#start')
 	const $duration = $('#duration')
 	const $hd = $('#hd')
+	const $audio = $('#audio')
 
 	const queue = {}
 
@@ -15,12 +16,13 @@ $(function() {
 		const start = $start.val().trim()
 		const duration = $duration.val().trim()
 		const hd = $hd.is(":checked")
+		const audio = $audio.is(":checked")
 
 		$input.val('')
 		$.ajax({
 			type: 'POST',
 			url: '/fetch',
-			data: `url=${encodeURIComponent(url)}&start=${encodeURIComponent(start)}&duration=${encodeURIComponent(duration)}&hd=${encodeURIComponent(hd)}`,
+			data: `url=${encodeURIComponent(url)}&start=${encodeURIComponent(start)}&duration=${encodeURIComponent(duration)}&hd=${encodeURIComponent(hd)}&audio=${encodeURIComponent(audio)}`,
 			dataType: 'json',
 			success({id}){
 				// start polling
