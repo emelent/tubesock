@@ -53,5 +53,5 @@ tomli==1.2.1
 typing-extensions==3.10.0.2
 uritemplate==3.0.1
 urllib3==1.26.6
-Werkzeug==2.0.1
+Werkzeug==2.2.3
 youtube-dl==2021.6.6
